@@ -563,7 +563,11 @@ void *network_initializer(void *data)
 				 * that it is not required to start recovery again
 				 */
 				if (software->bootloader_transaction_marker) {
+#ifdef CONFIG_SAVE_BOOTVAR_TRANSACTION
+					save_state_string((char*)BOOTVAR_TRANSACTION, STATE_INSTALLED);
+#else
 					reset_state((char*)BOOTVAR_TRANSACTION);
+#endif
 				}
 				notify(SUCCESS, RECOVERY_NO_ERROR, INFOLEVEL, "SWUPDATE successful !");
 				inst.last_install = SUCCESS;

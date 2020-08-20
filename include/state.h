@@ -52,6 +52,7 @@ static inline char* get_state_string(update_state_t state) {
 	switch (state) {
 		case STATE_IN_PROGRESS: return (char*)"in_progress";
 		case STATE_FAILED: return (char*)"failed";
+		case STATE_INSTALLED: return (char*)"installed";
 		default: break;
 	}
 	return (char*)state;

@@ -64,3 +64,17 @@ config GRUBENV_PATH
 	default "/boot/efi/EFI/BOOT/grub/grubenv"
 	help
 	  Provide path to GRUB environment block file
+
+config SAVE_BOOTVAR_TRANSACTION
+        bool "Save bootloader transaction marker on success"
+        depends on !BOOTLOADER_NONE
+        default n
+        help
+          Don't reset the bootloader transaction marker
+          following a successful programming.  It is up to the
+          bootloader to clear this environment variable on reboot.
+
+          This option is useful for devices that implement a
+          double-copy strategy, and can signal to the bootloader that
+          a successful programming has occurred and that the bootloader
+          should switch to the alternate partition.

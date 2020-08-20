@@ -396,7 +396,11 @@ static int install_from_file(char *fname, int check)
 	}
 
 	if (swcfg.bootloader_transaction_marker) {
+#ifdef CONFIG_SAVE_BOOTVAR_TRANSACTION
+		save_state_string((char*)BOOTVAR_TRANSACTION, STATE_INSTALLED);
+#else
 		reset_state((char*)BOOTVAR_TRANSACTION);
+#endif
 	}
 	fprintf(stdout, "Software updated successfully\n");
 	fprintf(stdout, "Please reboot the device to start the new software\n");
